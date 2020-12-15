@@ -1,10 +1,11 @@
-CFLAGS = 
+# For modern gcc/clang compilers
+CFLAGS = -ansi -Wno-implicit -Wno-return-type -Wno-comment -Wno-macro-redefined
 TIME = time
 
 all: rundhrystone rundhrystoneR rundhrystoneO rundhrystoneRO
 
 dhrystone: dhrystone.c
-	$(CC) dhrystone.c -o dhrystone
+	$(CC) $(CFLAGS) dhrystone.c -o dhrystone
 
 rundhrystone: dhrystone
 	@echo 'Running dhrystone (Level 1 optimization, without registers)'
@@ -15,7 +16,7 @@ rundhrystone: dhrystone
 
 
 dhrystoneR: dhrystone.c
-	$(CC) -DREG=register dhrystone.c -o dhrystoneR
+	$(CC) $(CFLAGS) -DREG=register dhrystone.c -o dhrystoneR
 
 rundhrystoneR: dhrystoneR
 	@echo 'Running dhrystone (Level 1 optimization, with registers)'
@@ -26,7 +27,7 @@ rundhrystoneR: dhrystoneR
 
 
 dhrystoneO: dhrystone.c
-	$(CC) -O dhrystone.c -o dhrystoneO
+	$(CC) $(CFLAGS) -O dhrystone.c -o dhrystoneO
 
 rundhrystoneO: dhrystoneO
 	@echo 'Running dhrystone (Level 2 optimization, without registers)'
@@ -37,7 +38,7 @@ rundhrystoneO: dhrystoneO
 
 
 dhrystoneRO: dhrystone.c
-	$(CC) -O -DREG=register dhrystone.c -o dhrystoneRO
+	$(CC) $(CFLAGS) -O -DREG=register dhrystone.c -o dhrystoneRO
 
 rundhrystoneRO: dhrystoneRO
 	@echo 'Running dhrystone (Level 2 optimization, with registers)'

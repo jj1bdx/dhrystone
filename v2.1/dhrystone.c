@@ -382,10 +382,14 @@
  *
  */
 
+/* For modern compilers with decent malloc() */
+#include <stdlib.h>
+
 /* Accuracy of timings and human fatigue controlled by next two lines */
 /*#define LOOPS	5000		/* Use this for slow or 16 bit machines */
-#define LOOPS	50000		/* Use this for slow or 16 bit machines */
+/*#define LOOPS	50000		/* Use this for slow or 16 bit machines */
 /*#define LOOPS	500000		/* Use this for faster machines */
+#define LOOPS	500000000	/* Use this for modern machines */
 
 /* Compiler dependent options */
 #undef	NOENUM			/* Define if compiler has no enum's */
@@ -488,7 +492,7 @@ Proc0()
 	Enumeration	 	EnumLoc;
 	String30		String1Loc;
 	String30		String2Loc;
-	extern char		*malloc();
+	/* extern char		*malloc(); */
 
 	register unsigned int	i;
 #ifdef TIME

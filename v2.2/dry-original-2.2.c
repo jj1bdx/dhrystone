@@ -1,35 +1,29 @@
-#ifdef NOTDEFINED /* To compile and run this file, say "sh dry-modern.c" */
+#ifdef NOTDEFINED /* To compile and run this file, say "sh dry.c" */
 	case $0 in
 	*.c) ;;
 	sh) echo 'Use "sh dry.c", not "sh < dry.c"' >&2; exit 1;;
 	*) echo 'Filename must end in ".c"' >&2; exit 1;;
 	esac
 
-	OLD_C_FLAGS="${CFLAGS}"
-	WARN_FLAGS="-ansi -Wno-implicit -Wno-return-type"
-	CFLAGS="${WARN_FLAGS} ${OLD_C_CFLAGS}"
-
 	echo "${CC=cc} -c ${CFLAGS} $0 -o dry1.o"
 	      ${CC}    -c ${CFLAGS} $0 -o dry1.o || exit 1
 	echo "${CC} -DPASS2 ${CFLAGS} $0 dry1.o ${LFLAGS} -o dry2"
 	      ${CC} -DPASS2 ${CFLAGS} $0 dry1.o ${LFLAGS} -o dry2 || exit 1
-	./dry2 ${1-5000000} 2>/dev/null
+	./dry2 ${1-50000} 2>/dev/null
 	echo "${CC=cc} -c -DREG ${CFLAGS} $0 -o dry1.o"
 	      ${CC}    -c -DREG ${CFLAGS} $0 -o dry1.o || exit 1
 	echo "${CC} -DPASS2 -DREG ${CFLAGS} $0 dry1.o ${LFLAGS} -o dry2nr"
 	      ${CC} -DPASS2 -DREG ${CFLAGS} $0 dry1.o ${LFLAGS} -o dry2nr || exit 1
-	./dry2nr ${1-5000000} 2>/dev/null
+	./dry2nr ${1-50000} 2>/dev/null
 	echo "${CC=cc} -c -O ${CFLAGS} $0 -o dry1.o"
 	      ${CC}    -c -O ${CFLAGS} $0 -o dry1.o || exit 1
 	echo "${CC} -DPASS2 -O ${CFLAGS} $0 dry1.o ${LFLAGS} -o dry2o"
 	      ${CC} -DPASS2 -O ${CFLAGS} $0 dry1.o ${LFLAGS} -o dry2o || exit 1
-	./dry2o ${1-5000000} 2>/dev/null
+	./dry2o ${1-50000} 2>/dev/null
 	rm -f dry1.o
 
         exit 0
 #endif
-
-/* modernized to conform gcc/clang requirements by Kenji Rikitake */
 
 /****************** "DHRYSTONE" Benchmark Program ***************************/
 #define Version "C, Version 2.2"
@@ -381,9 +375,6 @@
 
 /* Compiler and system dependent definitions: */
 
-#include <stdlib.h>
-#define TIME (1)
-
 /* variables for time measurement: */
 
 #ifdef TIME
@@ -436,7 +427,7 @@ struct tms      time_info;
 
 
 #define Mic_secs_Per_Second     1000000.0
-#define NUMBER_OF_RUNS		500000 /* Default number of runs */
+#define NUMBER_OF_RUNS		50000 /* Default number of runs */
 
 #ifdef  NOSTRUCTASSIGN
 #define structassign(d, s)      memcpy(&(d), &(s), sizeof(d))
@@ -509,7 +500,7 @@ char            Ch_1_Glob,
 int             Arr_1_Glob [50];
 int             Arr_2_Glob [50] [50];
 
-/* extern char     *malloc (); */
+extern char     *malloc ();
 Enumeration     Func_1 ();
   /* forward declaration necessary since Enumeration may not simply be int */
 

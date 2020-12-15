@@ -1,8 +1,10 @@
---- dry.c	2020-12-15 10:45:05.000000000 +0900
-+++ dry-modern.c	2020-12-15 10:47:48.000000000 +0900
+diff --git a/v2.2/dry.c b/v2.2/dry.c
+index 602572a..a3fc316 100644
+--- a/v2.2/dry.c
++++ b/v2.2/dry.c
 @@ -1,30 +1,36 @@
 -#ifdef NOTDEFINED /* To compile and run this file, say "sh dry.c" */
-+#ifdef NOTDEFINED /* To compile and run this file, say "sh dry-modern.c" */
++#ifdef NOTDEFINED /* To compile and run this file, say "sh ./dry.c" */
  	case $0 in
  	*.c) ;;
  	sh) echo 'Use "sh dry.c", not "sh < dry.c"' >&2; exit 1;;
@@ -41,17 +43,27 @@
  /****************** "DHRYSTONE" Benchmark Program ***************************/
  #define Version "C, Version 2.2"
  /*  File:       dhry_1.c (part 2 of 3)
-@@ -375,6 +381,9 @@
+@@ -375,6 +381,10 @@
  
  /* Compiler and system dependent definitions: */
  
 +#include <stdlib.h>
-+#define TIME (1)
++#define TIMES (1)
++#define HZ (100)
 +
  /* variables for time measurement: */
  
  #ifdef TIME
-@@ -427,7 +436,7 @@
+@@ -410,7 +420,7 @@ extern clock_t	clock();
+ #ifndef HZ	/* Added by SP 900619 */
+ #include <sys/param.h> /* If your system doesn't have this, use -DHZ=xxx */
+ #else
+-	*** You must define HZ!!! ***
++/*** You must define HZ!!! ***/
+ #endif /* HZ */
+ #ifndef PASS2
+ struct tms      time_info;
+@@ -427,7 +437,7 @@ struct tms      time_info;
  
  
  #define Mic_secs_Per_Second     1000000.0
@@ -60,7 +72,7 @@
  
  #ifdef  NOSTRUCTASSIGN
  #define structassign(d, s)      memcpy(&(d), &(s), sizeof(d))
-@@ -500,7 +509,7 @@
+@@ -500,7 +510,7 @@ char            Ch_1_Glob,
  int             Arr_1_Glob [50];
  int             Arr_2_Glob [50] [50];
  

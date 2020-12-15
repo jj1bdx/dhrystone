@@ -1,4 +1,14 @@
+# Dhrystone
+
 Multiple versions of Reinhold P. Weicker's **Dhrystone** benchmark
+
+Modified by Kenji Rikitake
+
+## Modified for modern gcc/clang
+
+v2.1 and v2.2 source code files are modified for modern gcc/clang, and for modern faster computers.
+
+## More from original README.md
 
 Sources downloaded and extracted from old Usenet postings and from
 sites linked from http://en.wikipedia.org/wiki/Dhrystone
